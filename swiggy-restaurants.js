@@ -145,7 +145,11 @@ async function fetchRestaurants() {
   setStatus("Fetching Swiggy JSON...");
 
   try {
-    const response = await fetch(url, {
+    const endpoint =
+      window.location.protocol === "file:"
+        ? url
+        : `/api/swiggy?url=${encodeURIComponent(url)}`;
+    const response = await fetch(endpoint, {
       headers: {
         accept: "application/json,text/plain,*/*",
       },
@@ -156,7 +160,7 @@ async function fetchRestaurants() {
     loadJson(json);
   } catch (error) {
     setStatus(
-      "The browser could not fetch this API directly. Swiggy may be blocking CORS. Open the URL, copy the JSON, and paste it into the box above.",
+      "Could not fetch the Swiggy JSON. Run this app through the local Node server, or paste the JSON as a fallback.",
       true,
     );
   }
