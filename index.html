@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Swiggy Restaurant Explorer</title>
+    <link rel="stylesheet" href="swiggy-restaurants.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="intro">
+        <div>
+          <p class="eyebrow">Swiggy JSON viewer</p>
+          <h1>Restaurant Explorer</h1>
+          <p class="summary">
+            Fetch a Swiggy listing response or paste JSON below. The page extracts only restaurant
+            records and displays them in a clean, searchable list.
+          </p>
+        </div>
+        <div class="stats" aria-label="Restaurant summary">
+          <span id="restaurantCount">0</span>
+          <small>restaurants</small>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="Data controls">
+        <label for="apiUrl">Swiggy API URL</label>
+        <div class="url-row">
+          <input
+            id="apiUrl"
+            type="url"
+            value="https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.4639607&lng=76.96142549999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+          />
+          <button id="fetchBtn" type="button">Fetch</button>
+        </div>
+
+        <details>
+          <summary>Paste JSON instead</summary>
+          <textarea id="jsonInput" spellcheck="false" placeholder="Paste the Swiggy JSON here..."></textarea>
+          <button id="parseBtn" type="button">Parse pasted JSON</button>
+        </details>
+      </section>
+
+      <section class="toolbar" aria-label="Restaurant filters">
+        <div class="search-wrap">
+          <label for="searchInput">Search restaurants</label>
+          <input id="searchInput" type="search" placeholder="Name, cuisine, area..." />
+        </div>
+        <div class="sort-wrap">
+          <label for="sortSelect">Sort by</label>
+          <select id="sortSelect">
+            <option value="rating">Highest rating</option>
+            <option value="time">Fastest delivery</option>
+            <option value="name">Name A-Z</option>
+          </select>
+        </div>
+      </section>
+
+      <p id="status" class="status" role="status">Paste JSON or fetch the API to begin.</p>
+      <section id="restaurantGrid" class="grid" aria-live="polite"></section>
+    </main>
+
+    <script src="swiggy-restaurants.js"></script>
+  </body>
+</html>
